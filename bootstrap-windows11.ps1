@@ -327,10 +327,8 @@ if ($runApps) {
         @{Name = "Synology Drive Client"; Id = "Synology.DriveClient" },
         @{Name = "Apple iCloud"; Id = "Apple.iCloud" },
 
-        # Gaming
+        # Other
         @{Name = "Steam"; Id = "Valve.Steam" },
-
-        # Other Apps
         @{Name = "ExpressVPN"; Id = "ExpressVPN.ExpressVPN" },
         @{Name = "Logseq"; Id = "Logseq.Logseq" },
         @{Name = "Notion"; Id = "Notion.Notion" }
@@ -346,6 +344,29 @@ if ($runApps) {
         catch {
             Write-Warning "Failed to install $($app.Name): $($_.Exception.Message)"
         }
+    }
+
+    # Install Kinto (Mac-style keyboard shortcuts for Windows)
+    Write-Host "`nInstalling Kinto (Mac-style keyboard shortcuts)..." -ForegroundColor Yellow
+    try {
+        Write-Host "Kinto provides Mac-style keyboard shortcuts for Windows..." -ForegroundColor Cyan
+        Write-Host "This will enable familiar shortcuts like Cmd+C, Cmd+V, Cmd+Tab, etc." -ForegroundColor Cyan
+
+        # Download and execute Kinto installation script
+        $kintoInstallScript = "Set-ExecutionPolicy Bypass -Scope Process -Force; iwr https://raw.githubusercontent.com/rbreaves/kinto/master/install/windows.ps1 -UseBasicParsing | iex"
+
+        Write-Host "Downloading and installing Kinto..." -ForegroundColor Green
+        Invoke-Expression $kintoInstallScript
+
+        Write-Host "Kinto installed successfully!" -ForegroundColor Green
+        Write-Host "After restart, Kinto will provide Mac-style keyboard shortcuts." -ForegroundColor Cyan
+        Write-Host "You can access Kinto settings from the system tray." -ForegroundColor Cyan
+    }
+    catch {
+        Write-Warning "Failed to install Kinto: $($_.Exception.Message)"
+        Write-Host "You can manually install Kinto later by running:" -ForegroundColor Yellow
+        Write-Host "Set-ExecutionPolicy Bypass -Scope Process -Force" -ForegroundColor Cyan
+        Write-Host "iwr https://raw.githubusercontent.com/rbreaves/kinto/master/install/windows.ps1 -UseBasicParsing | iex" -ForegroundColor Cyan
     }
 } # End of Applications section
 

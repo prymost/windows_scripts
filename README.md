@@ -73,6 +73,7 @@ The script installs these applications via winget:
 - ExpressVPN
 - Logseq (note-taking)
 - Notion (productivity)
+- **Kinto** (Mac-style keyboard shortcuts for Windows)
 
 ### ⚡ System Optimizations (Section 5)
 - **Disables Xbox services** - Reduces background processes if you don't game
@@ -109,31 +110,6 @@ The script installs these applications via winget:
 - 🎯 **Interactive menu** - Choose only the sections you need
 - 📝 **Automatically installs winget** - If not present, the script will install it
 
-## Post-Script Setup
-
-After running the script and restarting, complete these manual steps:
-
-1. **Configure Git** (if you installed it):
-   ```powershell
-   git config --global user.name "Your Name"
-   git config --global user.email "your.email@example.com"
-   ```
-
-2. **Set up Ubuntu for WSL** (if you enabled WSL):
-   ```powershell
-   # Ubuntu will be available after restart
-   wsl -d Ubuntu
-   ```
-
-3. **Configure GPU software** (if installed):
-   - NVIDIA: Open GeForce Experience to set up drivers
-   - AMD: Open Radeon Software for driver updates
-   - Intel: Open Graphics Command Center
-
-4. **Set up Visual Studio Code extensions** (if installed)
-5. **Configure your development projects**
-6. **Customize Windows Terminal settings** (if installed)
-
 ## Troubleshooting
 
 ### If the script fails to run:
@@ -165,12 +141,3 @@ To modify which applications are installed:
    @{Name="App Name"; Id="winget.id"}
    ```
 3. Find winget IDs using: `winget search "app name"`
-
-## Security Considerations
-
-This script:
-- ✅ Only uses official Microsoft winget repositories
-- ✅ Enhances your privacy by disabling data collection
-- ✅ Uses official GPU vendor software sources
-- ✅ Disables unnecessary services that could be attack vectors
-- ✅ Includes interactive menu to avoid unwanted changes
