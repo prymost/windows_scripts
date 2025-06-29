@@ -11,20 +11,6 @@ sudo apt update
 echo "Upgrading all packages..."
 sudo apt upgrade -y
 
-echo "🍺 ***** Homebrew Update *****"
-if command -v brew &> /dev/null; then
-    echo "Updating Homebrew itself..."
-    brew update
-
-    echo "Upgrading Homebrew packages..."
-    brew upgrade
-
-    echo "Cleaning up Homebrew..."
-    brew cleanup
-else
-    echo "Homebrew not found, skipping brew updates"
-fi
-
 echo "💎 ***** Ruby Gems Update *****"
 if command -v rbenv &> /dev/null; then
     # Check if there's a global Ruby version set
@@ -102,14 +88,6 @@ else
     echo "Docker not found, skipping Docker updates"
 fi
 
-echo "⭐ ***** Starship Update *****"
-if command -v starship &> /dev/null; then
-    echo "Updating Starship prompt..."
-    curl -sS https://starship.rs/install.sh | sh -s -- -y
-else
-    echo "Starship not found, skipping Starship update"
-fi
-
 echo "☁️  ***** AWS CLI Update *****"
 if command -v aws &> /dev/null; then
     echo "Current AWS CLI version:"
@@ -117,26 +95,6 @@ if command -v aws &> /dev/null; then
     echo "💡 To update AWS CLI v2, re-run the installation from my_installs.sh"
 else
     echo "AWS CLI not found, skipping AWS CLI update"
-fi
-
-echo "🐙 ***** GitHub CLI Update *****"
-if command -v gh &> /dev/null; then
-    echo "Current GitHub CLI version:"
-    gh version
-    echo "Updating GitHub CLI..."
-    sudo apt update
-    sudo apt install --only-upgrade gh -y
-else
-    echo "GitHub CLI not found, skipping gh update"
-fi
-
-echo "🔧 ***** Development Tools Update *****"
-# Update Neovim if installed via AppImage
-if [[ -f "/usr/local/bin/nvim" ]]; then
-    echo "Updating Neovim..."
-    curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-    chmod u+x nvim.appimage
-    sudo mv nvim.appimage /usr/local/bin/nvim
 fi
 
 echo "🧹 ***** Cleanup *****"
@@ -161,9 +119,3 @@ echo "🐧 OS: $(lsb_release -d | cut -f2)"
 echo "🔧 Kernel: $(uname -r)"
 echo "💾 Disk usage: $(df -h / | awk 'NR==2{print $5}') used"
 echo "🧠 Memory: $(free -h | awk 'NR==2{print $3 "/" $2}') used"
-
-if command -v neofetch &> /dev/null; then
-    echo ""
-    echo "📱 System info:"
-    neofetch --off
-fi
