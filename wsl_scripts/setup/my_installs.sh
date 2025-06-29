@@ -17,6 +17,7 @@ sudo apt install -y \
     bat \
     direnv \
     micro \
+    keychain \
     kubectl
 
 # Language-specific tools
