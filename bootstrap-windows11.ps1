@@ -326,6 +326,7 @@ if ($runApps) {
         @{Name = "Google Drive"; Id = "Google.GoogleDrive" },
         @{Name = "Synology Drive Client"; Id = "Synology.DriveClient" },
         @{Name = "Apple iCloud"; Id = "Apple.iCloud" },
+        @{Name = "Callibre"; Id = "calibre.calibre" },
 
         # Other
         @{Name = "Steam"; Id = "Valve.Steam" },
