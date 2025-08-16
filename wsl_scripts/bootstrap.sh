@@ -32,8 +32,18 @@ echo "🔄 Updating package database..."
 sudo apt update && sudo apt upgrade -y
 
 echo "✅ Bootstrap process completed!"
-echo "🔄 Please restart your WSL session to ensure all changes take effect."
-echo "💡 Run 'wsl --shutdown' in Windows PowerShell, then restart your WSL terminal"
+echo ""
+echo "🎨 Solarized Dark terminal theme setup:"
+echo "   ✅ Oh My Zsh with agnoster theme configured"
+echo "   ✅ MesloLGS NF font installed for powerline symbols"
+echo "   ✅ Auto-suggestions and syntax highlighting enabled"
+echo "   ✅ Git configuration optimized for WSL"
+echo ""
+echo "🔄 To complete the setup:"
+echo "   1. Change default shell: chsh -s \$(which zsh)"
+echo "   2. Restart WSL: wsl --shutdown (in Windows PowerShell)"
+echo "   3. Launch Ubuntu from Windows Terminal"
+echo "   4. Your beautiful Solarized Dark terminal is ready! 🎉"
 
 # Uncomment the line below if you want to restore from backup
 # "${SCRIPT_DIR}/setup/restore.sh"

@@ -391,6 +391,34 @@ if ($runOptimizations) {
 if ($runFinal) {
     Write-Host "`n[STEP 6] Final Configurations..." -ForegroundColor Yellow
 
+    # Configure Windows Terminal with Solarized Dark theme
+    Write-Host "Configuring Windows Terminal with Solarized Dark theme..." -ForegroundColor Green
+    try {
+        $terminalSettingsPath = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+        $workspaceSettingsPath = "$PSScriptRoot\windows_terminal_settings.json"
+
+        if (Test-Path $workspaceSettingsPath) {
+            if (Test-Path $terminalSettingsPath) {
+                # Backup existing settings
+                $timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
+                Copy-Item $terminalSettingsPath "$terminalSettingsPath.backup.$timestamp"
+                Write-Host "Backed up existing Windows Terminal settings" -ForegroundColor Cyan
+            }
+
+            # Copy Solarized Dark configuration
+            Copy-Item $workspaceSettingsPath $terminalSettingsPath -Force
+            Write-Host "Windows Terminal configured with Solarized Dark theme!" -ForegroundColor Green
+            Write-Host "Ubuntu WSL will be the default profile with Solarized Dark colors" -ForegroundColor Cyan
+        }
+        else {
+            Write-Warning "Windows Terminal settings template not found at: $workspaceSettingsPath"
+            Write-Host "Please manually configure Windows Terminal after installation" -ForegroundColor Yellow
+        }
+    }
+    catch {
+        Write-Warning "Could not configure Windows Terminal: $($_.Exception.Message)"
+    }
+
     # Install Windows Terminal as default terminal
     Write-Host "Setting Windows Terminal as default..." -ForegroundColor Green
     # This requires Windows 11 22H2 or later
@@ -413,6 +441,11 @@ Write-Host "`n================================================" -ForegroundColor
 Write-Host "Windows 11 Bootstrap Script Completed!" -ForegroundColor Green
 Write-Host "================================================" -ForegroundColor Cyan
 
+Write-Host "`n🎨 Solarized Dark Theme Setup:" -ForegroundColor Yellow
+Write-Host "   ✅ Windows Terminal configured with Solarized Dark colors" -ForegroundColor Green
+Write-Host "   ✅ Ubuntu WSL set as default profile" -ForegroundColor Green
+Write-Host "   💡 Next step: Run the WSL bootstrap to complete terminal setup" -ForegroundColor Cyan
+
 Write-Host "`nNOTE: Some changes require a system restart to take effect." -ForegroundColor Red
 $restart = Read-Host "`nWould you like to restart now? (y/n)"
 if ($restart -eq 'y' -or $restart -eq 'Y') {
@@ -422,4 +455,7 @@ if ($restart -eq 'y' -or $restart -eq 'Y') {
 }
 else {
     Write-Host "Please restart your computer manually when convenient." -ForegroundColor Yellow
+    Write-Host "`n🚀 After restart, launch Ubuntu from Windows Terminal and run:" -ForegroundColor Green
+    Write-Host "   cd /mnt/d/Workspace/windows_setup/wsl_scripts" -ForegroundColor Cyan
+    Write-Host "   ./bootstrap.sh" -ForegroundColor Cyan
 }
