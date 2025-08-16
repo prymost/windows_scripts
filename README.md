@@ -131,6 +131,32 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 - Ensure Virtualization is enabled in BIOS
 - Run: `wsl --install -d Ubuntu` manually after restart
 
+## 🔄 Ongoing Maintenance
+
+After the initial bootstrap, use the maintenance scripts to keep your system updated:
+
+### Available Maintenance Scripts
+- **`maintenance.ps1`** - Main maintenance script for Windows Updates and app updates
+- **`setup-scheduled-maintenance.ps1`** - Automate maintenance with Task Scheduler
+- **See [MAINTENANCE-README.md](MAINTENANCE-README.md)** for detailed documentation
+
+### Quick Usage
+```powershell
+# Run full maintenance interactively
+.\maintenance.ps1
+
+# Set up automated daily/weekly maintenance
+.\setup-scheduled-maintenance.ps1
+
+# Silent maintenance (ideal for automation)
+.\maintenance.ps1 -Silent -Force
+```
+
+### Default Automated Schedule
+- **Daily**: App updates via winget (6:00 AM)
+- **Weekly**: Full maintenance including Windows Updates (Sunday 3:00 AM)
+- **Startup**: Quick check 5 minutes after boot
+
 ## Customization
 
 To modify which applications are installed:
